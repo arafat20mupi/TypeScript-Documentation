@@ -1,213 +1,411 @@
 # TypeScript-Documentation
 
-TypeScript এর 30টি মূল বৈশিষ্ট্য এবং সুবিধা নিচে উল্লেখ করা হলো:
+নিচে TypeScript-এর 50টি গুরুত্বপূর্ণ বৈশিষ্ট্য এবং তাদের সাথে সংশ্লিষ্ট কোড উদাহরণ দেয়া হলো:
 
-### TypeScript এর মূল বৈশিষ্ট্য
+### 1-10: মৌলিক বৈশিষ্ট্য
 
-1. **স্ট্যাটিক টাইপিং**: TypeScript স্ট্যাটিক টাইপিং সাপোর্ট করে, যা কোড লেখার সময় টাইপ ত্রুটি ধরতে সাহায্য করে।
+1. **স্ট্যাটিক টাইপিং**
    ```typescript
-   let num: number = 10; // সঠিক টাইপ নির্ধারণ
+   let age: number = 25; // টাইপ নির্ধারণ
    ```
 
-2. **ক্লাস**: TypeScript ক্লাস ভিত্তিক প্রোগ্রামিংকে সমর্থন করে, যা অবজেক্ট ওরিয়েন্টেড পদ্ধতির সুবিধা দেয়।
+2. **টাইপ ইনফারেন্স**
    ```typescript
-   class Person {
-     constructor(public name: string) {}
-   }
+   let name = "John"; // TypeScript স্বয়ংক্রিয়ভাবে টাইপ নির্ধারণ করবে
    ```
 
-3. **ইন্টারফেস**: ইন্টারফেস ব্যবহার করে টাইপ নির্ধারণ করা যায়, যা কোডের পাঠযোগ্যতা বাড়ায়।
+3. **ইন্টারফেস**
    ```typescript
    interface User {
-     id: number;
-     name: string;
+       id: number;
+       name: string;
    }
+   const user: User = { id: 1, name: "Alice" };
    ```
 
-4. **ডেকোরেটর**: ক্লাস এবং মেথডে ডেকোরেটর ব্যবহার করা যায়, যা কোডের পুনঃব্যবহারযোগ্যতা বাড়ায়।
-   ```typescript
-   function Log(target: any, key: string) {
-     console.log(`${key} is called`);
-   }
-   ```
-
-5. **জেনেরিক্স**: জেনেরিক টাইপ সাপোর্ট করে, যা কোডের পুনঃব্যবহারযোগ্যতা বাড়ায়।
+4. **জেনেরিক্স**
    ```typescript
    function identity<T>(arg: T): T {
-     return arg;
+       return arg;
    }
+   const result = identity<number>(5);
    ```
 
-6. **নালেবল টাইপস**: নাল ও undefined এর জন্য আলাদা টাইপ নির্ধারণ করা যায়।
+5. **মডিউল সিস্টেম**
    ```typescript
-   let value: string | null = null;
-   ```
-
-7. **টাইপ গার্ডস**: টাইপ যাচাই করতে টাইপ গার্ড ব্যবহার করা যায়।
-   ```typescript
-   function printId(id: string | number) {
-     if (typeof id === "string") {
-       console.log(`String ID: ${id}`);
-     }
+   // utils.ts
+   export function add(x: number, y: number): number {
+       return x + y;
    }
+   // main.ts
+   import { add } from './utils';
+   console.log(add(5, 3));
    ```
 
-8. **এনাম**: কোডে এনাম ব্যবহার করে নির্দিষ্ট মানের জন্য নাম দেওয়া যায়।
+6. **এনামস**
    ```typescript
-   enum Direction {
-     Up,
-     Down,
-     Left,
-     Right
+   enum Color {
+       Red,
+       Green,
+       Blue
    }
+   let c: Color = Color.Green;
    ```
 
-9. **অবজেক্টের জন্য টাইপস**: অবজেক্ট টাইপ নির্ধারণ করা যায়, যা কোডের স্থায়িত্ব বাড়ায়।
+7. **অভ্যন্তরীণ টাইপ**
    ```typescript
-   type Point = { x: number; y: number };
+   let isActive: boolean = true; // প্রিমিটিভ টাইপ
    ```
 
-10. **এপিআই ডিফিনিশন**: টাইপ সংজ্ঞায়িত করে কোডের জন্য উন্নত ডকুমেন্টেশন প্রদান করা যায়।
+8. **নাল এবং আনডিফাইন্ড**
+   ```typescript
+   let value: string | null = null; // নাল টাইপ সমর্থন
+   ```
+
+9. **ক্লাস**
+   ```typescript
+   class Person {
+       name: string;
+       constructor(name: string) {
+           this.name = name;
+       }
+   }
+   const person = new Person("John");
+   ```
+
+10. **সুপার ক্লাস**
     ```typescript
-    /**
-     * Calculates sum
-     * @param a - First number
-     * @param b - Second number
-     * @returns Sum of a and b
-     */
-    function sum(a: number, b: number): number {
-      return a + b;
+    class Animal {
+        makeSound() {
+            console.log("Animal sound");
+        }
+    }
+    class Dog extends Animal {
+        makeSound() {
+            console.log("Bark");
+        }
     }
     ```
 
-11. **টপ-লেভেল অ্যাওয়েট**: অ্যাওয়েট টপ-লেভেল কোডে ব্যবহার করা যায়।
-    ```typescript
-    const data = await fetchData();
-    ```
+### 11-20: উন্নত বৈশিষ্ট্য
 
-12. **অপশনাল প্রোপার্টিজ**: অবজেক্টে প্রোপার্টি অপশনাল নির্ধারণ করা যায়।
+11. **অপশনাল প্রোপার্টিজ**
     ```typescript
     interface User {
-      id: number;
-      name: string;
-      age?: number; // অপশনাল প্রোপার্টি
+        id: number;
+        name: string;
+        age?: number; // অপশনাল প্রোপার্টি
     }
     ```
 
-13. **রিড-অনলি প্রোপার্টি**: অবজেক্টে রিড-অনলি প্রোপার্টি তৈরি করা যায়।
+12. **রিড-অনলি প্রোপার্টি**
     ```typescript
-    interface User {
-      readonly id: number;
-      name: string;
+    interface Point {
+        readonly x: number;
+        readonly y: number;
     }
     ```
 
-14. **অ্যানোটেশনস**: কোডের উপর মন্তব্য যোগ করতে সাহায্য করে।
+13. **ফাংশন টাইপ**
     ```typescript
-    let username: string = "Arafat"; // ইউজারনেম
-    ```
-
-15. **মডিউল সিস্টেম**: মডিউল সিস্টেম ব্যবহার করে কোডকে সংগঠিত করা যায়।
-    ```typescript
-    import { User } from './User';
-    ```
-
-16. **ডিফল্ট আর্গুমেন্টস**: ফাংশনে ডিফল্ট আর্গুমেন্ট নির্ধারণ করা যায়।
-    ```typescript
-    function greet(name: string = "Guest") {
-      console.log(`Hello, ${name}`);
-    }
-    ```
-
-17. **অ্যাসিনক্রোনাস ফাংশন**: অ্যাসিনক্রোনাস ফাংশন তৈরি করা যায়।
-    ```typescript
-    async function fetchData() {
-      const response = await fetch('url');
-      return response.json();
-    }
-    ```
-
-18. **টার্গেটিং**: কম্পাইলার অপশন দিয়ে ES মডিউল বা সাধারণ ফাংশন নিয়ে কাজ করা যায়।
-    ```json
-    {
-      "compilerOptions": {
-        "target": "ES6"
-      }
-    }
-    ```
-
-19. **ফাংশন ওভারলোডিং**: একই ফাংশনের বিভিন্ন টাইপের জন্য আলাদা সিগনেচার ব্যবহার করা যায়।
-    ```typescript
-    function overload(value: string): string;
-    function overload(value: number): number;
-    function overload(value: any): any {
-      return value;
-    }
-    ```
-
-20. **এশিনক্রোনাস/অবজারভেবল টাইপস**: এশিনক্রোনাস কোডের জন্য নতুন টাইপ ব্যবহার করা যায়।
-    ```typescript
-    type Observable<T> = {
-      subscribe(callback: (value: T) => void): void;
+    type Greet = (name: string) => void;
+    const greet: Greet = (name) => {
+        console.log(`Hello, ${name}`);
     };
     ```
 
-21. **প্লাগইন সাপোর্ট**: টুলিং উন্নতির জন্য প্লাগইন সাপোর্ট করে।
-    ```bash
-    npm install typescript --save-dev
-    ```
-
-22. **ইনফারেন্স**: টাইপ ইনফারেন্সের মাধ্যমে কোড লেখার সময় টাইপ নির্ধারণ করা হয়।
+14. **ইউনিয়ন টাইপ**
     ```typescript
-    let str = "Hello"; // টাইপ স্বয়ংক্রিয়ভাবে string নির্ধারণ
-    ```
-
-23. **জাভাস্ক্রিপ্টের উপর বেসড**: JavaScript এর সমস্ত বৈশিষ্ট্য TypeScript-এ পাওয়া যায়।
-    ```javascript
-    let x = 5; // JavaScript কোড TypeScript-এ চলে
-    ```
-
-24. **লাইব্রেরি সমর্থন**: বড় লাইব্রেরির জন্য টাইপ ডিফিনিশন ব্যবহার করা যায়।
-    ```typescript
-    import * as React from 'react';
-    ```
-
-25. **অ্যালিয়াস**: টাইপ অ্যালিয়াস ব্যবহার করে কোডের গঠন তৈরি করা যায়।
-    ```typescript
-    type ID = string | number;
-    ```
-
-26. **উন্নত ডেবাগিং**: ডেবাগিংয়ের সময় উন্নত তথ্য প্রদান করে।
-    ```typescript
-    let user = { name: "Arafat", age: 25 };
-    ```
-
-27. **প্রজেক্ট কনফিগারেশন**: টিপিএস বা টাস্ক রানার ব্যবহার করে প্রজেক্ট কনফিগারেশন করা যায়।
-    ```json
-    {
-      "include": ["src/**/*"],
-      "exclude": ["node_modules"]
+    function printId(id: number | string) {
+        console.log(`Your ID is: ${id}`);
     }
     ```
 
-28. **স্ট্রাকচারাল টাইপিং**: টাইপ তৈরি এবং যাচাইয়ের জন্য স্ট্রাকচারাল টাইপিং ব্যবহার করা যায়।
+15. **ইন্টারসেকশন টাইপ**
     ```typescript
-    interface A { x: number; }
-    interface B { x: number; y: number; }
-    let b: B = { x: 1, y: 2 };
-    let a: A = b; // OK
+    interface Admin {
+        admin: boolean;
+    }
+    interface User {
+        name: string;
+    }
+    type AdminUser = Admin & User;
     ```
 
-29. **টাইপ নির্ধারণ**: যেকোনো সময় টাইপ পরিবর্তন করা যায়।
+16. **টাইপ গার্ড**
     ```typescript
-    let value: number | string;
-    value = 5; // OK
-    value = "Hello"; // OK
+    function isNumber(value: any): value is number {
+        return typeof value === "number";
+    }
     ```
 
-30. **দ্রুত উন্নয়ন**: টাইপ নিরাপত্তা এবং উন্নত টুলিংয়ের কারণে দ্রুত কোড উন্নয়ন সম্ভব।
+17. **অ্যাসার্টস**
+    ```typescript
+    let unknownValue: any = "Hello";
+    let strLength: number = (unknownValue as string).length;
+    ```
+
+18. **মেপস এবং সেটস**
+    ```typescript
+    let map: Map<string, number> = new Map();
+    map.set("one", 1);
+    ```
+
+19. **ফাংশন ওভারলোডিং**
+    ```typescript
+    function combine(a: string, b: string): string;
+    function combine(a: number, b: number): number;
+    function combine(a: any, b: any): any {
+        return a + b;
+    }
+    ```
+
+20. **ডেকোরেটরস**
+    ```typescript
+    function log(target: any, propertyName: string, descriptor: PropertyDescriptor) {
+        console.log(`${propertyName} has been called`);
+    }
+
+    class Example {
+        @log
+        sayHello() {
+            console.log("Hello");
+        }
+    }
+    ```
+
+### 21-30: অন্যান্য গুরুত্বপূর্ণ বৈশিষ্ট্য
+
+21. **এনামস**
+    ```typescript
+    enum Direction {
+        Up,
+        Down,
+        Left,
+        Right
+    }
+    ```
+
+22. **নেস্টেড অবজেক্ট**
+    ```typescript
+    interface User {
+        name: string;
+        address: {
+            street: string;
+            city: string;
+        };
+    }
+    ```
+
+23. **স্ট্যাটিক টাইপস**
+    ```typescript
+    class Circle {
+        static pi: number = 3.14;
+        radius: number;
+        constructor(radius: number) {
+            this.radius = radius;
+        }
+    }
+    ```
+
+24. **জেনেরিক ক্লাস**
+    ```typescript
+    class Box<T> {
+        private contents: T;
+        constructor(value: T) {
+            this.contents = value;
+        }
+        getContents(): T {
+            return this.contents;
+        }
+    }
+    ```
+
+25. **ম্যাপ এবং ফিল্টার**
+    ```typescript
+    const numbers: number[] = [1, 2, 3];
+    const doubled = numbers.map(n => n * 2);
+    ```
+
+26. **অ্যাসিং এবং অপেক্ষা**
+    ```typescript
+    async function fetchData(url: string): Promise<any> {
+        const response = await fetch(url);
+        return response.json();
+    }
+    ```
+
+27. **ইন্টারফেসের প্রসারণ**
+    ```typescript
+    interface Vehicle {
+        wheels: number;
+    }
+    interface Car extends Vehicle {
+        brand: string;
+    }
+    ```
+
+28. **ব্রাউজার এনভায়রনমেন্ট**
+    ```typescript
+    if (typeof window !== "undefined") {
+        console.log("This is a browser environment");
+    }
+    ```
+
+29. **ব্ল্যাকবক্স টাইপস**
+    ```typescript
+    type UserID = string & { readonly brand: unique symbol };
+    ```
+
+30. **প্যারামিটার ডিকনস্ট্রাকশন**
+    ```typescript
+    function greet({ name, age }: { name: string; age: number }) {
+        console.log(`Hello, my name is ${name} and I am ${age} years old.`);
+    }
+    ```
+
+### 31-40: উন্নত টেকনিক
+
+31. **এনভায়রনমেন্ট ভেরিয়েবলস**
+    ```typescript
+    const apiKey: string = process.env.API_KEY as string;
+    ```
+
+32. **ইম্পোর্ট এবং এক্সপোর্ট**
+    ```typescript
+    export const PI = 3.14;
+    import { PI } from './math';
+    ```
+
+33. **টাইপ শেথিং**
+    ```typescript
+    interface User {
+        name: string;
+    }
+    type Admin = User & { admin: true };
+    ```
+
+34. **থার্ড-পার্টি লাইব্রেরি টাইপস**
+    ```typescript
+    // @types/express ইনস্টল করা থাকতে হবে
+    import express from 'express';
+    ```
+
+35. **ফাংশন অ্যানোনিমাস**
+    ```typescript
+    const multiply = (x: number, y: number): number => x * y;
+    ```
+
+36. **রিটান টাইপ**
     ```typescript
     function add(x: number, y: number): number {
-      return x + y;
+        return x + y;
     }
     ```
+
+37. **টাইপ এন্ড টাস্ক**
+    ```typescript
+    type Task = {
+        title: string;
+        completed: boolean;
+    };
+    ```
+
+38. **মুডিফায়ারস**
+    ```typescript
+    class Base {
+        protected x: number;
+        constructor() {
+            this.x = 10;
+        }
+    }
+    ```
+
+39. **ভ্যারিয়েন্ট টাইপ**
+    ```typescript
+    type Variant = 'small' | 'medium' | 'large';
+    ```
+
+40. **টাইপ স্ট্রিং**
+    ```typescript
+    type StringMap = { [key: string]: string };
+    ```
+
+### 41-50: অন্যান্য বৈশিষ্ট্য
+
+41. **ডিফল্ট প্যারামিটার**
+    ```typescript
+    function greet(name: string = "Guest") {
+        console.log(`Hello, ${name}`);
+    }
+    ```
+
+42. **শর্তাধীন টাইপ**
+    ```typescript
+    type Response<T> = T extends string ? string : number;
+    ```
+
+43. **ম্যাপিং টাইপস**
+    ```typescript
+    type ReadOnly<T> = {
+        readonly [K in keyof T]: T[K];
+    };
+    ```
+
+44. **ক্রিয়েট টাইপ**
+    ```typescript
+    type Point = {
+        x: number;
+        y: number;
+    };
+    ```
+
+45. **এশিনক্রনাস**
+    ```typescript
+    async function fetchUser(userId: number): Promise<User>
+
+ {
+        const response = await fetch(`/api/users/${userId}`);
+        return response.json();
+    }
+    ```
+
+46. **রিটার্ন টাইপ**
+    ```typescript
+    function calculateArea(radius: number): number {
+        return Math.PI * radius * radius;
+    }
+    ```
+
+47. **ডিক্লেয়ারেশন মার্জিং**
+    ```typescript
+    interface Window {
+        myCustomFunction: () => void;
+    }
+    ```
+
+48. **সাবটাইপিং**
+    ```typescript
+    type Animal = { name: string };
+    type Dog = Animal & { breed: string };
+    ```
+
+49. **অভ্যন্তরীণ ফাংশন**
+    ```typescript
+    class Example {
+        private internalFunction() {
+            console.log("This is a private function");
+        }
+    }
+    ```
+
+50. **কাস্টম টাইপ গার্ড**
+    ```typescript
+    function isString(value: any): value is string {
+        return typeof value === "string";
+    }
+    ```
+
+### উপসংহার
+TypeScript কোড লেখার জন্য একটি শক্তিশালী টুল, যা জাভাস্ক্রিপ্টের উপর স্ট্যাটিক টাইপিং, উন্নত গঠন এবং উন্নত টুলিংয়ের মাধ্যমে কোডের গুণমান উন্নত করে। এই 50টি পয়েন্ট আপনাকে TypeScript-এ আপনার দক্ষতা বৃদ্ধিতে সহায়তা করবে।
+
